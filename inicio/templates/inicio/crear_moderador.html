@@ -1,0 +1,22 @@
+{% extends 'genericos/base.html' %}
+
+{% block title_head %}
+<title>Centro de Moderadores</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+<h1>Quien es</h1>
+{% endblock h1_header %}
+
+
+{% block contenido %}
+<form action={% url 'inicio:crear_moderador' %} method="POST">
+    {% csrf_token %}
+    <div class='formulario'>
+<li>
+     {{formulario}} 
+    </table>
+    <button>Crear</button>
+    </div>
+</form>
+{% endblock contenido %}

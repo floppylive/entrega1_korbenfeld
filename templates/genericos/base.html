@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        {% block title_head %}
+        <title>Template Base</title>
+        {% endblock title_head %}
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href={% static 'inicio/css/styles.css' %} rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-light bg-light static-top">
+            <div class="container">
+                <a class="navbar-brand" href={% url 'inicio:inicio' %}>Inicio</a>
+                <a class="navbar-brand" href={% url 'inicio:lista_frases' %}>Frases</a>
+                
+                
+                <a class="navbar-brand" href={% url 'inicio:crear_frase' %}>Agregar frase</a>
+                {% if request.user.is_authenticated %}
+                <div class="user-info">
+                    {% if request.user.infoextra.avatar_thumbnail %}
+                    <img src={{ request.user.infoextra.avatar_thumbnail.url }} href={% url 'usuarios:editar_perfil' %}  >
+                  
+                    <a class="navbar-brand" href={% url 'usuarios:editar_perfil' %}>Editar perfil </a>
+                    
+                    <span>{{ request.user.username }}</span>
+                </div>
+                {% endif %}
+                <a class="btn btn-primary" href={% url 'usuarios:logout' %}>Logout</a>
+                {% else %}
+                <a class="btn btn-primary" href={% url 'usuarios:login' %}>Login</a>
+                <a class="btn btn-primary" href={% url 'usuarios:registro' %}>Registrarse</a>
+            </div>
+            {% endif %}
+        </nav>
+        <!-- Masthead-->
+        {% block header %}
+        <header class="masthead">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-white">
+                            <!-- Page heading-->
+                            {% block h1_header %}
+                            <h1 class="mb-5">Bienvenidos a la concesionaria Pepito</h1>
+                            {% endblock h1_header %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        {% endblock header %}
+        {% block contenido %}
+        {% endblock contenido %}
+        <!-- Footer-->
+        <footer class="footer bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                        {% if request.user.is_authenticated %}
+                      
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="list-inline-item" href={% url 'inicio:about' %}>About</a>
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src={% static 'inicio/js/scripts.js' %}></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>
