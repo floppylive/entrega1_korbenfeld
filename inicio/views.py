@@ -57,16 +57,17 @@ def crear_usuario(request):
     
 
 @user_passes_test(lambda u: u.is_superuser)
-def editar_frase(request, id_frase):
-    mifrase = get_object_or_404(Frase, id=id_frase)
+def editar_frase(request, frase_id):
+    frase = Frase.objects.get(id=frase_id)
     if request.method == 'POST':
-        formulario = Frase(request.POST, instance=mifrase)
+        formulario = CrearFraseFormulario(request.POST, instance=frase)
         if formulario.is_valid():
             formulario.save()
             return redirect('inicio:lista_frases')
     else:
-        formulario = CrearFraseFormulario(instance=mifrase)
-    return render(request, 'inicio/editar_frase.html', {'formulario': formulario, 'id_frase': id_frase})
+        formulario = CrearFraseFormulario(instance=frase, initial={'id': frase.id})
+    context = {'frase': frase, 'formulario': formulario}
+    return render(request, 'inicio/editar_frase.html', context)
 
 @user_passes_test(lambda u: u.is_superuser)
 def eliminar_frase(request, id_frase):
