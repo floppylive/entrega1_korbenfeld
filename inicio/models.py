@@ -22,10 +22,4 @@ class Moderador(models.Model):
     def str(self):
         return f'Soy {self.nombre} {self.apellido}'
 
-class Usuario(models.Model):
-    nombre = models.CharField(max_length=20)
-    apellido = models.CharField(max_length=20)
-    inhabilitado=models.BooleanField()
 
-    def str(self):
-        return f'Soy {self.nombre} {self.apellido}'
