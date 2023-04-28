@@ -1,0 +1,20 @@
+{% extends 'genericos/base.html' %}
+
+{% block title_head %}
+<title>Eliminar aviso</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+<h1>Editar aviso</h1>
+{% endblock h1_header %}
+
+{% block contenido %}
+
+
+
+<form action={% url 'inicio:eliminar_aviso' aviso.pk %} method="POST">
+    {% csrf_token %}
+    <button type="submit">Eliminar</button>
+</form>
+
+{% endblock contenido %}

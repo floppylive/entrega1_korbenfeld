@@ -68,6 +68,19 @@ def editar_frase(request, id):
 
     return render(request, 'inicio/editar_frase.html', { 'formulario': formulario, 'id':id})    
 
+def editar_aviso(request, id):
+    aviso = get_object_or_404(Aviso,id=id)
+    if request.method == 'POST':
+        formulario = CrearAvisoFormulario(request.POST, instance=aviso)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('inicio:lista_avisos')
+    else:
+        
+        formulario = CrearAvisoFormulario(instance=aviso)
+
+    return render(request, 'inicio/editar_aviso.html', { 'formulario': formulario, 'id':id}) 
+
 
 @user_passes_test(lambda u: u.is_superuser)
 def eliminar_frase(request, id):
@@ -77,6 +90,13 @@ def eliminar_frase(request, id):
         return redirect('inicio:lista_frases')
     return render(request, 'inicio/eliminar_frase.html', {'frase': frase})
 
+
+def eliminar_aviso(request, id):
+    aviso = get_object_or_404(Aviso, id=id)
+    if request.method == 'POST':
+        aviso.delete()
+        return redirect('inicio:lista_avisos')
+    return render(request, 'inicio/eliminar_aviso.html', {'aviso': aviso})
 
 
 
