@@ -1,11 +1,11 @@
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.template import Template, Context, loader, RequestContext
-from inicio.models import Frase, Moderador
+from inicio.models import Frase, Aviso
 from usuarios.models import User
 from datetime import datetime
 
 from django.shortcuts import render, redirect, get_object_or_404
-from inicio.forms import CrearFraseFormulario, CrearModeradorFormulario, BuscarFrases
+from inicio.forms import CrearFraseFormulario, CrearAvisoFormulario, BuscarFrases
 from django.contrib.auth.decorators import user_passes_test
 
 
@@ -80,26 +80,26 @@ def eliminar_frase(request, id):
 
 
 
-def crear_moderador(request):
+def crear_aviso(request):
     
     if request.method == "POST":
-        formulario = CrearModeradorFormulario(request.POST)
+        formulario = CrearAvisoFormulario(request.POST)
         
         if formulario.is_valid():
             datos_correctos = formulario.cleaned_data
         
-            elmoderador = Moderador(nombre=datos_correctos['nombre'],apellido=datos_correctos['apellido'])
-            elmoderador.save()
+            elaviso = Aviso(titulo=datos_correctos['titulo'],descripcion=datos_correctos['descripcion'])
+            elaviso.save()
 
-            return redirect('inicio:crear_moderador')
+            return redirect('inicio:crear_aviso')
     
-    formulario = CrearModeradorFormulario()
-    return render(request, 'inicio/crear_moderador.html', {'formulario': formulario})
+    formulario = CrearAvisoFormulario()
+    return render(request, 'inicio/crear_aviso.html', {'formulario': formulario})
 
-def lista_moderadores(request):
+def lista_avisos(request):
     
-    moderadores = Moderador.objects.all()
-    formulario_busqueda= CrearModeradorFormulario()
+    avisos = Aviso.objects.all()
+    formulario_busqueda= CrearAvisoFormulario()
  
             
-    return render(request, 'inicio/lista_moderadores.html', {'moderadores': moderadores, 'formulario': formulario_busqueda})
+    return render(request, 'inicio/lista_avisos.html', {'avisos': avisos, 'formulario': formulario_busqueda})

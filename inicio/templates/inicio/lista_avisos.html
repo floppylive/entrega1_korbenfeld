@@ -5,32 +5,32 @@
 {% endblock title_head %}
 
 {% block h1_header %}
-<h1>Moderadores</h1>
+<h1>Avisos</h1>
 {% endblock h1_header %}
 
 
 {% block contenido %}
 
-
+{% if request.user.is_superuser  %}
     <td>
-        <form action={% url 'inicio:crear_moderador' %}   method="POST" >
+        <form action={% url 'inicio:crear_aviso' %}   method="POST" >
             {% csrf_token %}
-            <button type="submit">Crear Nuevo moderador</button>
+            <button type="submit">Crear Nuevo aviso</button>
         </form>
    
     </td>
+    {% endif %}
 
-
-{% if moderadores %}
-    {% for moderador in moderadores %}
+{% if avisos %}
+    {% for aviso in avisos %}
     <li>
-         {{moderador.nombre}}
-         {{moderador.apellido}}
+         {{aviso.titulo}}
+         {{aviso.descripcion}}
     </li>
     
     {% endfor %}
 
 {% else %}
-    <h2>No hay moderadores por el momento.</h2>
+    <h2>Todo en orden.</h2>
 {% endif %}
 {% endblock contenido %}

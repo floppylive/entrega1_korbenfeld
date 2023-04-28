@@ -14,12 +14,12 @@ class Frase(models.Model):
     def str(self):
         return f'Soy {self.nombre}, tengo {self.edad} y yo digo que {self.frase}'
 
-class Moderador(models.Model):
-    nombre = models.CharField(max_length=20)
-    apellido = models.CharField(max_length=20)
+class Aviso(models.Model):
+    titulo = models.CharField(max_length=20)
+    descripcion = models.CharField(max_length=600)
  
 
     def str(self):
-        return f'Soy {self.nombre} {self.apellido}'
+        return f'Soy {self.titulo} {self.descripcion}'
 
 

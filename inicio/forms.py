@@ -1,5 +1,5 @@
 from django import forms
-from inicio.models import Frase
+from inicio.models import Frase, Aviso
 
 
 class CrearFraseFormulario(forms.ModelForm):
@@ -12,15 +12,14 @@ class CrearFraseFormulario(forms.ModelForm):
    # frase= forms.CharField(max_length=450)
    # privado=forms.BooleanField(required=False)
 
-class Meta:
-    model = Frase
-    fields = ['nombre', 'edad', 'frase', 'privado']
 
 
 
-class CrearModeradorFormulario(forms.ModelForm):
+
+class CrearAvisoFormulario(forms.ModelForm):
     class Meta:
-        fields = ['nombre', 'apellido']
+        model = Aviso
+        fields = ['titulo', 'descripcion']
       #nombre = forms.CharField(max_length=20)
       #apellido = forms.CharField(max_length=20)
 

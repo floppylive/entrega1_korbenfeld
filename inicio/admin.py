@@ -1,5 +1,5 @@
 from django.contrib import admin
-from inicio.models import Frase, Moderador
+from inicio.models import Frase, Aviso
 
 
 # Register your models here.
@@ -7,4 +7,4 @@ from inicio.models import Frase, Moderador
 
 
 # v2
-admin.site.register([Frase, Moderador])
+admin.site.register([Frase, Aviso])

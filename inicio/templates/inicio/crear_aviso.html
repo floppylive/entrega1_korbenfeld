@@ -1,7 +1,7 @@
 {% extends 'genericos/base.html' %}
 
 {% block title_head %}
-<title>Centro de Moderadores</title>
+<title>Centro de Avisos</title>
 {% endblock title_head %}
 
 {% block h1_header %}
@@ -10,7 +10,7 @@
 
 
 {% block contenido %}
-<form action={% url 'inicio:crear_moderador' %} method="POST">
+<form action={% url 'inicio:crear_aviso' %} method="POST">
     {% csrf_token %}
     <div class='formulario'>
 <li>
