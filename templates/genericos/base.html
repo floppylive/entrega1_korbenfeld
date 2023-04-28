@@ -29,13 +29,16 @@
                 <a class="navbar-brand" href={% url 'inicio:crear_frase' %}>Agregar frase</a>
                 {% if request.user.is_authenticated %}
                 <div class="user-info">
-                    {% if request.user.infoextra.avatar_thumbnail %}
-                    <img src={{ request.user.infoextra.avatar_thumbnail.url }} href={% url 'usuarios:editar_perfil' %}  >
-                  
-                    <a class="navbar-brand" href={% url 'usuarios:editar_perfil' %}>Editar perfil </a>
-                    
-                    <span>{{ request.user.username }}</span>
+                    <a class="navbar-brand" href={% url 'usuarios:editar_perfil' %}>Editar Perfil</a>
+                    {% if request.user.infoextra.avatar %}
+                    <img src="{{ request.user.infoextra.avatar.url }}" width="35" height="35">
+                   
+                    {% endif %}
                 </div>
+
+
+                {% if request.user.is_superuser  %}
+                <a class="navbar-brand" href={% url 'inicio:lista_moderadores' %}>Moderadores </a>
                 {% endif %}
                 <a class="btn btn-primary" href={% url 'usuarios:logout' %}>Logout</a>
                 {% else %}

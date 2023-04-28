@@ -1,0 +1,36 @@
+{% extends 'genericos/base.html' %}
+
+{% block title_head %}
+<title>Frases</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+<h1>Moderadores</h1>
+{% endblock h1_header %}
+
+
+{% block contenido %}
+
+
+    <td>
+        <form action={% url 'inicio:crear_moderador' %}   method="POST" >
+            {% csrf_token %}
+            <button type="submit">Crear Nuevo moderador</button>
+        </form>
+   
+    </td>
+
+
+{% if moderadores %}
+    {% for moderador in moderadores %}
+    <li>
+         {{moderador.nombre}}
+         {{moderador.apellido}}
+    </li>
+    
+    {% endfor %}
+
+{% else %}
+    <h2>No hay moderadores por el momento.</h2>
+{% endif %}
+{% endblock contenido %}

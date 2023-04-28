@@ -17,7 +17,7 @@ class Frase(models.Model):
 class Moderador(models.Model):
     nombre = models.CharField(max_length=20)
     apellido = models.CharField(max_length=20)
-    fecha_registro = models.DateField()
+ 
 
     def str(self):
         return f'Soy {self.nombre} {self.apellido}'

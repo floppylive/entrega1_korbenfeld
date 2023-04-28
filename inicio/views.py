@@ -5,7 +5,7 @@ from usuarios.models import User
 from datetime import datetime
 
 from django.shortcuts import render, redirect, get_object_or_404
-from inicio.forms import CrearFraseFormulario, CrearModeradorFormulario, BuscarFrases, CrearUsuarioFormulario
+from inicio.forms import CrearFraseFormulario, CrearModeradorFormulario, BuscarFrases
 from django.contrib.auth.decorators import user_passes_test
 
 
@@ -54,24 +54,27 @@ def crear_frase(request):
     
 
 @user_passes_test(lambda u: u.is_superuser)
-def editar_frase(request, frase_id):
-    frase = Frase.objects.get(id=frase_id)
+
+def editar_frase(request, id):
+    frase = get_object_or_404(Frase,id=id)
     if request.method == 'POST':
         formulario = CrearFraseFormulario(request.POST, instance=frase)
         if formulario.is_valid():
             formulario.save()
             return redirect('inicio:lista_frases')
     else:
-        formulario = CrearFraseFormulario(instance=frase, initial={'id': frase.id})
-    context = {'frase': frase, 'formulario': formulario}
-    return render(request, 'inicio/editar_frase.html', context)
+        
+        formulario = CrearFraseFormulario(instance=frase)
+
+    return render(request, 'inicio/editar_frase.html', { 'formulario': formulario, 'id':id})    
+
 
 @user_passes_test(lambda u: u.is_superuser)
-def eliminar_frase(request, id_frase):
-    frase = get_object_or_404(Frase, id=id_frase)
+def eliminar_frase(request, id):
+    frase = get_object_or_404(Frase, id=id)
     if request.method == 'POST':
         frase.delete()
-        return redirect('inicio:lista_frase')
+        return redirect('inicio:lista_frases')
     return render(request, 'inicio/eliminar_frase.html', {'frase': frase})
 
 
@@ -85,10 +88,18 @@ def crear_moderador(request):
         if formulario.is_valid():
             datos_correctos = formulario.cleaned_data
         
-            elmoderador = Moderador(nombre=datos_correctos['nombre'],apellido=datos_correctos['apellido'], fecha_registro=datetime.now())
+            elmoderador = Moderador(nombre=datos_correctos['nombre'],apellido=datos_correctos['apellido'])
             elmoderador.save()
 
-            return redirect('inicio:crear_frase')
+            return redirect('inicio:crear_moderador')
     
     formulario = CrearModeradorFormulario()
     return render(request, 'inicio/crear_moderador.html', {'formulario': formulario})
+
+def lista_moderadores(request):
+    
+    moderadores = Moderador.objects.all()
+    formulario_busqueda= CrearModeradorFormulario()
+ 
+            
+    return render(request, 'inicio/lista_moderadores.html', {'moderadores': moderadores, 'formulario': formulario_busqueda})

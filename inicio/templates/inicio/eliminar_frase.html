@@ -1,0 +1,20 @@
+{% extends 'genericos/base.html' %}
+
+{% block title_head %}
+<title>Eliminar frase</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+<h1>Editar frase</h1>
+{% endblock h1_header %}
+
+{% block contenido %}
+
+
+
+<form action={% url 'inicio:eliminar_frase' frase.pk %} method="POST">
+    {% csrf_token %}
+    <button type="submit">Eliminar</button>
+</form>
+
+{% endblock contenido %}
