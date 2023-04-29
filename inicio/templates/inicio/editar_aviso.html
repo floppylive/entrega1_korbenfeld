@@ -5,13 +5,19 @@
 {% endblock title_head %}
 
 {% block h1_header %}
+
 <h1>Editar aviso</h1>
+
 {% endblock h1_header %}
 
 {% block contenido %}
+<div class="miformulario">
 <form method="POST">
     {% csrf_token %}
+   
     {{ formulario.as_p}}
-    <button type="submit">Guardar cambios</button>
+
+    <button class="botonredondo" type="submit">Guardar cambios</button>
 </form>
+</div>
 {% endblock contenido %}

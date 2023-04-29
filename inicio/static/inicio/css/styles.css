@@ -158,6 +158,37 @@ h4, .h4 {
 h5, .h5 {
   font-size: 1.25rem;
 }
+form, .miformulario {
+  text-align: center;
+  margin-left: 500;
+  font-style: oblique;
+
+}
+
+
+.botonredondo {
+  min-width: 70px;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  font-size: 15px;
+  font-style: oblique;
+  
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 20px;
+  border: 2px solid #495057;
+  background: #495057;
+}
+/*.css-button-fully-rounded--grey:hover {
+  background: #fff;
+  color: #495057
+}*/
+
 
 h6, .h6 {
   font-size: 1rem;
@@ -639,6 +670,9 @@ progress {
   padding-left: calc(var(--bs-gutter-x) * 0.5);
   margin-right: auto;
   margin-left: auto;
+  font-style: oblique;
+ 
+  background-color: rgba(139, 153, 216, 0.030);
 }
 
 @media (min-width: 576px) {

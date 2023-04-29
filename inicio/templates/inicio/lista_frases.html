@@ -6,20 +6,22 @@
 
 {% block h1_header %}
 <h1>Listado de Frases</h1>
-{% endblock h1_header %}
 
 
-{% block contenido %}
+
+
 <p>
     <form action={% url 'inicio:lista_frases' %} >
-        <div class='formulario'>
+        <div class='miformulario'>
             <li>
         {{formulario}}
         <button>Buscar</button>
         </div>
     </form>
 </p>
-
+{% endblock h1_header %}
+{% block contenido %}
+<div class='miformulario'>
 {% if frases %}
     {% for mifrase in frases %}
     <li>
@@ -30,18 +32,19 @@
     <td>
         <form action={% url 'inicio:editar_frase' mifrase.pk %} method="POST" style="display: inline;">
             {% csrf_token %}
-            <button type="submit">Editar</button>
+            <button class="botonredondo" type="submit">Editar</button>
         </form>
         <form action={% url 'inicio:eliminar_frase' mifrase.pk %} method="POST" style="display: inline;">
             {% csrf_token %}
-            <button type="submit">Eliminar</button>
+            <button class="botonredondo" type="submit">Eliminar</button>
         </form>
    
     </td>
     {% endif %}
     {% endfor %}
-
+</div>
 {% else %}
     <h2>Hace tu primera frase!.</h2>
 {% endif %}
+
 {% endblock contenido %}

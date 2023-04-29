@@ -12,11 +12,11 @@
 {% block contenido %}
 <form action={% url 'inicio:crear_frase' %} method="POST">
     {% csrf_token %}
-    <div class='formulario'>
+    <div class="miformulario">
 <li>
      {{formulario}} 
     </table>
-    <button>Crear</button>
+    <button class="botonredondo">Crear</button>
     </div>
 </form>
 {% endblock contenido %}

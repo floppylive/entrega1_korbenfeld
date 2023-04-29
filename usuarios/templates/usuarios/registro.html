@@ -15,10 +15,12 @@
 {% endif %}
 <form action={% url 'usuarios:registro' %} method="post">
     {% csrf_token %}
-    <table>
-        {{form}}
-    </table>
-    <button>Registrarse</button>
-</form>
+    <div class="miformulario">
+       
+        {{form.as_p}}
+  
 
+    <button class="botonredondo">Registrarse</button>
+</form>
+</div>
 {% endblock contenido %}
