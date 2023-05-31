@@ -5,7 +5,7 @@ from inicio.models import Frase, Aviso
 class CrearFraseFormulario(forms.ModelForm):
     class Meta:
         model = Frase
-        fields= ['nombre', 'edad', 'frase', 'privado']
+        fields= ['nombre','imagen', 'edad', 'frase', 'privado']
 
 
 

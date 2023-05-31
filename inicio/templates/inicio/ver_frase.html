@@ -1,0 +1,34 @@
+{% extends 'genericos/base.html' %}
+
+{% block title_head %}
+<title>Mi Frase</title>
+{% endblock title_head %}
+
+
+{% block h1_header %}
+<h1>Mi Frase</h1>
+{% endblock h1_header %}
+
+{% block contenido %}
+<div class='miformulario'>
+{% if mifrase.errors %}
+<p>Formulario invalido</p>
+{% endif %}
+
+        <div>
+            {{mifrase.frase}}
+            {{mifrase.edad}}
+            {{mifrase.imagen}}
+            {{mifrase.nombre}}
+
+
+         
+
+        </div>
+       
+ 
+
+ 
+
+</div>
+{% endblock contenido %}

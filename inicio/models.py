@@ -1,5 +1,6 @@
 #from django.db import models
-from django.db import models 
+from django.db import models
+from ckeditor.fields import RichTextField  
 
 
 # Create your models here.
@@ -8,7 +9,8 @@ from django.db import models
 class Frase(models.Model):
     nombre = models.CharField(max_length=20)
     edad = models.IntegerField()
-    frase = models.CharField(max_length=450)
+    frase = RichTextField()
+    imagen = models.ImageField(upload_to='media/', null=True, blank=True)
     privado = models.BooleanField()
 
     def str(self):

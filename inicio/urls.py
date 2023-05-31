@@ -17,4 +17,5 @@ urlpatterns = [
     path('lista-avisos/', views.lista_avisos, name='lista_avisos'),
     path('eliminar/<int:id>/', Eliminar_frase_View.as_view(), name='eliminar_frase'),
     path('eliminar-aviso/<int:id>/', views.eliminar_aviso, name='eliminar_aviso'),
+    path('ver_frase/<int:id>/', views.ver_frase, name='ver_frase'),
 ]

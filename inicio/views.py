@@ -46,7 +46,7 @@ def crear_frase(request):
         if formulario.is_valid():
             datos_correctos = formulario.cleaned_data
         
-            lafrase = Frase(nombre=datos_correctos['nombre'],edad=datos_correctos['edad'], frase=datos_correctos['frase'],privado=datos_correctos['privado'])
+            lafrase = Frase(nombre=datos_correctos['nombre'],imagen=datos_correctos['imagen'],edad=datos_correctos['edad'], frase=datos_correctos['frase'],privado=datos_correctos['privado'])
             lafrase.save()
 
             return redirect('inicio:crear_frase')
@@ -129,3 +129,8 @@ def lista_avisos(request):
             
     return render(request, 'inicio/lista_avisos.html', {'avisos': avisos, 'formulario': formulario_busqueda})
 
+def ver_frase(request, id):
+    mifrase = get_object_or_404(Frase, id=id)
+    return render(request, 'inicio/ver_frase.html', {'mifrase': mifrase})
+   #  mifrase = Frase.objects.filter(id__icontains=id )
+   #  return render(request, 'inicio/ver_frase.html', {'mifrase': mifrase})
