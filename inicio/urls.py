@@ -1,5 +1,6 @@
 from django.urls import path
 from inicio import views
+from .views import *
 
 
 app_name = 'inicio'
@@ -14,6 +15,6 @@ urlpatterns = [
     path('frases/', views.lista_frases, name='lista_frases'),
     path('crear-aviso/', views.crear_aviso, name='crear_aviso'),
     path('lista-avisos/', views.lista_avisos, name='lista_avisos'),
-    path('eliminar/<int:id>/', views.eliminar_frase, name='eliminar_frase'),
+    path('eliminar/<int:id>/', Eliminar_frase_View.as_view(), name='eliminar_frase'),
     path('eliminar-aviso/<int:id>/', views.eliminar_aviso, name='eliminar_aviso'),
 ]

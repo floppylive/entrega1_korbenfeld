@@ -3,12 +3,16 @@ from django.template import Template, Context, loader, RequestContext
 from inicio.models import Frase, Aviso
 from usuarios.models import User
 from datetime import datetime
+from django.views import View
 
 from django.shortcuts import render, redirect, get_object_or_404
 from inicio.forms import CrearFraseFormulario, CrearAvisoFormulario, BuscarFrases
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.mixins import UserPassesTestMixin
 
-
+class SuperuserRequiredMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_superuser
 def mi_vista(request):
     return render(request, 'inicio/index.html')
 
@@ -82,13 +86,14 @@ def editar_aviso(request, id):
     return render(request, 'inicio/editar_aviso.html', { 'formulario': formulario, 'id':id}) 
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def eliminar_frase(request, id):
-    frase = get_object_or_404(Frase, id=id)
-    if request.method == 'POST':
-        frase.delete()
-        return redirect('inicio:lista_frases')
-    return render(request, 'inicio/eliminar_frase.html', {'frase': frase})
+#@user_passes_test(lambda u: u.is_superuser)
+class Eliminar_frase_View(SuperuserRequiredMixin, View):
+    def eliminar_frase(request, id):
+        frase = get_object_or_404(Frase, id=id)
+        if request.method == 'POST':
+            frase.delete()
+            return redirect('inicio:lista_frases')
+        return render(request, 'inicio/eliminar_frase.html', {'frase': frase})
 
 
 def eliminar_aviso(request, id):
@@ -123,3 +128,4 @@ def lista_avisos(request):
  
             
     return render(request, 'inicio/lista_avisos.html', {'avisos': avisos, 'formulario': formulario_busqueda})
+
