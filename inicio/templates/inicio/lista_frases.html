@@ -27,7 +27,7 @@
     <li>
         Nombre: {{mifrase.nombre}} - Edad: {{mifrase.edad}}
         Frase : {{mifrase.frase}}
-        <img src={{ mifrase.imagen }} alt="Imagen"></h2>
+        <img src="{{ mifrase.imagen }}" alt="Imagen"></h2>
     </li>
     {% if request.user.is_superuser  %}
     <td>

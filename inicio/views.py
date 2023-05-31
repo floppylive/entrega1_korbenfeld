@@ -49,7 +49,7 @@ def crear_frase(request):
             lafrase = Frase(nombre=datos_correctos['nombre'],imagen=datos_correctos['imagen'],edad=datos_correctos['edad'], frase=datos_correctos['frase'],privado=datos_correctos['privado'])
             lafrase.save()
 
-            return redirect('inicio:crear_frase')
+            return render(request, 'inicio/ver_frase.html', {'mifrase': lafrase})
     
     formulario = CrearFraseFormulario()
     return render(request, 'inicio/crear_frase.html', {'formulario': formulario})
