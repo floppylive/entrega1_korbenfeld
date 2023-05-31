@@ -15,24 +15,23 @@
 <p>Formulario invalido</p>
 {% endif %}
 
-
-
-   
-        
         <div>
+            {% if request.user == perfil.user %}
+            <a href="{% url 'usuarios:editar_descripcion' perfil.user.username %}" class="btn btn-primary">Editar Descripción</a>
+            <a href="{% url 'usuarios:editar_enlace' perfil.user.username %}" class="btn btn-primary">Editar Enlace</a>
+          {% endif %}
+            <p>Nombre: {{ miperfil.user.first_name }} {{ miperfil.user.last_name }}</p>
+            <p>Email: {{ miperfil.user.email }}</p>
+            <p>Descripción: {{ miperfil.frase_descripcion }}</p>
             {% if request.user.infoextra.avatar %}
             <h2>Perfil de {{ miperfil.user.username }} <img src="{{ miperfil.avatar.url }}" alt="Foto de perfil"></h2>
             {% else %}
             <h2>Perfil de {{ miperfil.user.username }}</h2>
             {% endif %}
-          <p>Nombre: {{ miperfil.user.first_name }} {{ miperfil.user.last_name }}</p>
-          <p>Email: {{ miperfil.user.email }}</p>
-          <p>Descripción: {{ miperfil.frase_descripcion }}</p>
+
+
          
-          {% if request.user == perfil.user %}
-            <a href="{% url 'usuarios:editar_descripcion' perfil.user.username %}" class="btn btn-primary">Editar Descripción</a>
-            <a href="{% url 'usuarios:editar_enlace' perfil.user.username %}" class="btn btn-primary">Editar Enlace</a>
-          {% endif %}
+
         </div>
        
  
