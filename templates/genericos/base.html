@@ -29,7 +29,8 @@
                 <a class="navbar-brand" href={% url 'inicio:crear_frase' %}>Agregar frase</a>
                 {% if request.user.is_authenticated %}
                 <div class="user-info">
-                    <a class="navbar-brand" href={% url 'usuarios:editar_perfil' %}>Editar Perfil</a>
+                    <a class="navbar-brand" href={% url 'usuarios:editar_perfil'  %}>Editar Perfil</a>
+                    <a class="navbar-brand" href={% url 'usuarios:mi_perfil' username=request.user.username %}>Mi Perfil</a>
                     {% if request.user.infoextra.avatar %}
                     <img src="{{ request.user.infoextra.avatar.url }}" width="35" height="35">
                    
@@ -56,7 +57,7 @@
                         <div class="text-center text-white">
                             <!-- Page heading-->
                             {% block h1_header %}
-                            <h1 class="mb-5">Bienvenidos a la concesionaria Pepito</h1>
+                            <h1 class="mb-5">Bienvenidos Frasemania</h1>
                             {% endblock h1_header %}
                         </div>
                     </div>

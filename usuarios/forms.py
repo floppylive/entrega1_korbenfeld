@@ -18,6 +18,7 @@ class FormularioRegistro(UserCreationForm):
 class EdicionPerfil(UserChangeForm):
     password = None
     email = forms.EmailField()
+    frase_descripcion=forms.CharField(label='frase_descripcion', max_length=30)
     first_name = forms.CharField(label='Nombre', max_length=30)
     last_name = forms.CharField(label='Apellido', max_length=30)
 
@@ -25,7 +26,7 @@ class EdicionPerfil(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name', 'avatar']
+        fields = ['frase_descripcion','email', 'first_name', 'last_name', 'avatar']
         widgets = {
             'avatar': forms.ClearableFileInput(attrs={'multiple': False}),
         }

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login as login_django
 from usuarios.forms import FormularioRegistro, EdicionPerfil
@@ -7,6 +7,7 @@ from usuarios.models import InfoExtra
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
 
 
 def login(request):
@@ -61,3 +62,9 @@ def editar_perfil(request):
 class CambiarContrasenia(LoginRequiredMixin, PasswordChangeView):
     template_name = 'usuarios/cambiar_contrasenia.html'
     success_url = reverse_lazy('usuarios:editar_perfil')
+    
+
+def mi_perfil(request, username):
+    miperfil = get_object_or_404(InfoExtra, user__username=username)
+    return render(request, 'usuarios/mi_perfil.html', {'miperfil': miperfil})
+
